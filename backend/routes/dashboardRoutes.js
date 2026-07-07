@@ -1,14 +1,11 @@
 import express from "express";
-import {
-  getDashboard,
-} from "../controllers/dashboardController.js";
+import { getDashboard, saveTestResult } from "../controllers/dashboardController.js";
 
-const router =
-  express.Router();
+const router = express.Router();
 
-router.get(
-  "/:id",
-  getDashboard
-);
+router.get("/:id", getDashboard);
+
+
+router.post("/save-result", saveTestResult);
 
 export default router;

@@ -1,184 +1,520 @@
-import { useState } from "react";
-import Navbar from "../../components/Navbar";
+import {
+  useEffect,
+  useState,
+  useRef,
+} from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  getProfile,
+  updateProfile,
+  uploadImage,
+} from "../../services/profileService";
 import Sidebar from "../../components/Sidebar";
-import "../../assets/css/Profile.css";
+import "./Profile.css";
 
-function Profile() {
+export default function Profile() {
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-
+  const [editMode, setEditMode] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
 
+  const [profile, setProfile] = useState({
+    profileImage: "",
+    about: "",
+
+    academic: {
+      college: "",
+      degree: "",
+      branch: "",
+      year: "",
+      cgpa: "",
+    },
+
+    skills: [],
+    selectedCompanies: [],
+  });
+
+  const [skillInput, setSkillInput] = useState("");
+  const [companyInput, setCompanyInput] = useState("");
+
+
+const fileInputRef = useRef();
+
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
+  const loadProfile = async () => {
+    try {
+      const res = await getProfile(user.id);
+      setProfile(res.data);
+
+if (
+  res.data.about ||
+  res.data.academic.college ||
+  res.data.skills.length > 0
+) {
+  setEditMode(false);
+}
+    } catch (err) {
+      console.log(err);
+    }
+  };
+   const handleImageUpload = async (e) => {
+
+  const file = e.target.files[0];
+
+  if (!file) return;
+
+  try {
+
+    const res = await uploadImage(file);
+
+    setProfile({
+
+      ...profile,
+
+      profileImage: res.data.imageUrl,
+
+    });
+
+  }
+
+  catch (err) {
+
+    console.log(err);
+
+    alert("Image upload failed");
+
+  }
+
+};
+  
+
+  const saveProfile = async () => {
+    try {
+      await updateProfile(user.id, profile);
+     
+
+      alert("Profile Updated Successfully!");
+      setEditMode(false);
+
+    } catch (err) {
+      console.log(err);
+      alert("Failed to update profile");
+    }
+  };
+  const enableEdit = () => {
+  setEditMode(true);
+};
+
+  
+
+  const addSkill = () => {
+    if (
+      skillInput.trim() &&
+      !profile.skills.includes(skillInput)
+    ) {
+      setProfile({
+        ...profile,
+        skills: [...profile.skills, skillInput],
+      });
+
+      setSkillInput("");
+    }
+  };
+
+  const removeSkill = (skill) => {
+    setProfile({
+      ...profile,
+      skills: profile.skills.filter((s) => s !== skill),
+    });
+  };
+
+ 
+
+  const addCompany = () => {
+    if (
+      companyInput.trim() &&
+      !profile.selectedCompanies.includes(companyInput)
+    ) {
+      setProfile({
+        ...profile,
+        selectedCompanies: [
+          ...profile.selectedCompanies,
+          companyInput,
+        ],
+      });
+
+      setCompanyInput("");
+    }
+  };
+
+  const removeCompany = (company) => {
+    setProfile({
+      ...profile,
+      selectedCompanies:
+        profile.selectedCompanies.filter(
+          (c) => c !== company
+        ),
+    });
+  };
+
+  
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    navigate("/login");
+  };
+
   return (
-    <>
-      <Navbar />
+  <div className="dashboard-container">
 
-      <div className="profile-container">
-        <Sidebar
-          collapsed={collapsed}
-          setCollapsed={setCollapsed}
-        />
+    <Sidebar
+      collapsed={collapsed}
+      setCollapsed={setCollapsed}
+    />
 
-        <div className="profile-content">
+    <div className="profile-content">
 
-          <h1>My Profile</h1>
+      <div className="profile-page">
 
-          {/* Profile Card */}
-          <div className="profile-card">
+      <h1>My Profile</h1>
 
-            <div className="profile-top">
+      {/* Profile Image */}
 
-              <div className="profile-image">
-                <i className="fa-solid fa-user"></i>
-              </div>
+    <div className="profile-header-card">
 
-              <div className="profile-info">
-                <h2>{user?.name}</h2>
-                <p>{user?.email}</p>
+  <div className="profile-image-wrapper">
 
-                <button className="edit-btn">
-                  <i className="fa-solid fa-pen"></i>
-                  Edit Profile
-                </button>
-              </div>
+    <img
+      src={
+        profile.profileImage ||
+        "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+      }
+      alt="Profile"
+      className="profile-image"
+    />
 
-            </div>
+    {editMode && (
 
-          </div>
+      <button
+        className="camera-btn"
+        onClick={() =>
+          fileInputRef.current.click()
+        }
+      >
+        <i className="fa-solid fa-camera"></i>
+      </button>
 
-          {/* Personal Information */}
+    )}
 
-          <div className="profile-section">
+  </div>
 
-            <h2>Personal Information</h2>
+  <input
+    type="file"
+    accept="image/*"
+    ref={fileInputRef}
+    style={{ display: "none" }}
+    onChange={handleImageUpload}
+  />
 
-            <div className="profile-grid">
+  <h2>{user?.name}</h2>
 
-              <div className="input-group">
-                <label>Full Name</label>
-                <input
-                  type="text"
-                  value={user?.name || ""}
-                  readOnly
-                />
-              </div>
+  <p className="profile-degree">
+    {profile.academic.degree || "Student"}
+  </p>
 
-              <div className="input-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  value={user?.email || ""}
-                  readOnly
-                />
-              </div>
+</div>
+      {/* About */}
 
-              <div className="input-group">
-                <label>Phone Number</label>
-                <input
-                  type="text"
-                  placeholder="Enter phone number"
-                />
-              </div>
+      <div className="profile-card">
 
-              <div className="input-group">
-                <label>Gender</label>
+        <h2>About Me</h2>
 
-                <select>
-                  <option>Select Gender</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Other</option>
-                </select>
+        {editMode ? (
+  <textarea
+    rows="5"
+    value={profile.about}
+    onChange={(e) =>
+      setProfile({
+        ...profile,
+        about: e.target.value,
+      })
+    }
+    placeholder="Tell something about yourself..."
+  />
+) : (
+  <p className="about-text">
+    {profile.about || "No information added."}
+  </p>
+)}
 
-              </div>
+      </div>
 
-              <div className="input-group">
-                <label>Date of Birth</label>
+      {/* Academic */}
 
-                <input type="date" />
-              </div>
+      <div className="profile-card">
 
-            </div>
+        <h2>Academic Details</h2>
 
-          </div>
+        {editMode ? (
+  <input
+    placeholder="College"
+    value={profile.academic.college}
+    onChange={(e) =>
+      setProfile({
+        ...profile,
+        academic: {
+          ...profile.academic,
+          college: e.target.value,
+        },
+      })
+    }
+  />
+) : (
+  <div className="detail-row">
+    <span className="detail-label">College</span>
+    <span className="detail-value">
+      {profile.academic.college}
+    </span>
+  </div>
+)}
 
-          {/* Academic Details */}
+        {editMode ? (
+  <input
+    placeholder="Degree"
+    value={profile.academic.degree}
+    onChange={(e) =>
+      setProfile({
+        ...profile,
+        academic: {
+          ...profile.academic,
+          degree: e.target.value,
+        },
+      })
+    }
+  />
+) : (
+  <div className="detail-row">
+    <span className="detail-label">Degree</span>
+    <span className="detail-value">
+      {profile.academic.degree}
+    </span>
+  </div>
+)}
 
-          <div className="profile-section">
+       {editMode ? (
+  <input
+    placeholder="Branch"
+    value={profile.academic.branch}
+    onChange={(e) =>
+      setProfile({
+        ...profile,
+        academic: {
+          ...profile.academic,
+          branch: e.target.value,
+        },
+      })
+    }
+  />
+) : (
+  <div className="detail-row">
+    <span className="detail-label">Branch</span>
+    <span className="detail-value">
+      {profile.academic.branch}
+    </span>
+  </div>
+)}
 
-            <h2>Academic Details</h2>
+        {editMode ? (
+  <input
+    placeholder="Year"
+    value={profile.academic.year}
+    onChange={(e) =>
+      setProfile({
+        ...profile,
+        academic: {
+          ...profile.academic,
+          year: e.target.value,
+        },
+      })
+    }
+  />
+) : (
+  <div className="detail-row">
+    <span className="detail-label">Year</span>
+    <span className="detail-value">
+      {profile.academic.year}
+    </span>
+  </div>
+)}
 
-            <div className="profile-grid">
 
-              <div className="input-group">
-                <label>College</label>
-                <input
-                  type="text"
-                  placeholder="Enter college name"
-                />
-              </div>
+      </div>
 
-              <div className="input-group">
-                <label>Degree</label>
-                <input
-                  type="text"
-                  placeholder="MCA"
-                />
-              </div>
+      {/* Skills */}
 
-              <div className="input-group">
-                <label>Department</label>
-                <input
-                  type="text"
-                  placeholder="Computer Applications"
-                />
-              </div>
+      <div className="profile-card">
 
-              <div className="input-group">
-                <label>CGPA</label>
-                <input
-                  type="text"
-                  placeholder="Enter CGPA"
-                />
-              </div>
+        <h2>Skills</h2>
 
-            </div>
+      {editMode && (
+  <div className="add-row">
 
-          </div>
+    <input
+      placeholder="Add Skill"
+      value={skillInput}
+      onChange={(e) =>
+        setSkillInput(e.target.value)
+      }
+    />
 
-          {/* Skills */}
+    <button onClick={addSkill}>
+      Add
+    </button>
 
-          <div className="profile-section">
+  </div>
+)}
 
-            <h2>Skills</h2>
+        <div className="tags">
 
-            <textarea
-              placeholder="HTML, CSS, JavaScript, React, Node.js..."
-              rows="5"
-            ></textarea>
+          {profile.skills.map((skill) => (
 
-          </div>
+            <span
+              key={skill}
+              className="tag"
+            >
+              {skill}
 
-          {/* Resume */}
+              {editMode && (
+  <button
+    onClick={() =>
+      removeSkill(skill)
+    }
+  >
+    ×
+  </button>
+)}
 
-          <div className="profile-section">
+            </span>
 
-            <h2>Resume</h2>
-
-            <input
-              type="file"
-              accept=".pdf"
-            />
-
-          </div>
-
-          <button className="save-btn">
-            Save Changes
-          </button>
+          ))}
 
         </div>
-      </div>
-    </>
-  );
-}
 
-export default Profile;
+      </div>
+
+      {/* Companies */}
+
+      <div className="profile-card">
+
+        <h2>Selected Companies</h2>
+
+        {editMode && (
+  <div className="add-row">
+
+          <input
+            placeholder="Add Company"
+            value={companyInput}
+            
+            onChange={(e) =>
+              setCompanyInput(e.target.value)
+            }
+          />
+
+          <button
+  onClick={addCompany}
+  
+>
+  Add
+</button>
+
+       </div>
+)}
+
+        <div className="tags">
+
+          {profile.selectedCompanies.map(
+            (company) => (
+
+              <span
+                key={company}
+                className="tag"
+              >
+                {company}
+
+                {editMode && (
+  <button
+    onClick={() =>
+      removeCompany(company)
+    }
+  >
+    ×
+  </button>
+)}
+
+              </span>
+
+            )
+          )}
+
+        </div>
+
+      </div>
+
+      {/* Buttons */}
+
+      <div className="profile-buttons">
+
+  {editMode ? (
+
+    <>
+      <button
+        className="save-btn"
+        onClick={saveProfile}
+      >
+        Save Profile
+      </button>
+
+      <button
+        className="cancel-btn"
+        onClick={()=>{
+          loadProfile();
+          setEditMode(false);
+        }}
+      >
+        Cancel
+      </button>
+
+    </>
+
+  ) : (
+
+    <button
+      className="edit-btn"
+      onClick={enableEdit}
+    >
+      Edit Profile
+    </button>
+
+  )}
+
+  <button
+    className="logout-btn"
+    onClick={logout}
+  >
+    Logout
+  </button>
+
+</div>
+
+         </div>
+
+    </div>
+
+  </div>
+);
+}

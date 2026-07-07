@@ -1,16 +1,19 @@
-.dashboard-container {
-  display: flex;
-  height: calc(100vh - 70px);
+.dashboard-container{
+    display:flex;
+   
+    
 }
 
-.sidebar {
+.dashboard-sidebar {
   width: 240px;
   background: #335365;
   color: white;
   transition: 0.3s;
+  
+  
 }
 
-.sidebar.collapsed {
+.dashboard-sidebar.collapsed {
   width: 80px;
 }
 
@@ -20,7 +23,7 @@
   cursor: pointer;
 }
 
-.sidebar a {
+.dashboard-sidebar a {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -29,15 +32,17 @@
   text-decoration: none;
 }
 
-.sidebar a:hover {
+.dashboard-sidebar a:hover {
   background: rgba(255, 255, 255, 0.15);
 }
 
-.content {
+.dashboard-content {
   flex: 1;
   background: #f4f7fc;
   padding: 35px;
-  overflow-y: auto;
+  
+  
+  
 }
 .dashboard-header {
   display: flex;
@@ -132,15 +137,12 @@
   color: #2979ff;
 }
 
-.bottom-container {
-  
-     display:flex;
-  gap:25px;
-  margin-top:35px;
-  align-items:stretch;
-
+.bottom-container{
+    display:flex;
+    gap:25px;
+    margin-top:30px;
+    align-items:flex-start;
 }
-
 .performance-card {
     flex:1;
 
@@ -168,20 +170,14 @@
   margin-bottom: 20px;
 }
 
-/* Upcoming Tests Card */
+
 
 .test-card-container{
-  width:330px;
-  flex-shrink:0;
-
-  background:#fff;
-  border-radius:18px;
-  padding:22px;
-
-  box-shadow:0 4px 15px rgba(0,0,0,.08);
-
-  display:flex;
-  flex-direction:column;
+    flex:1;
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 .test-header{
@@ -247,20 +243,9 @@
   font-size:13px;
   color:#777;
 }
-.sidebar {
-  width: 240px;
-  background: #335365;
-  color: white;
-  transition: 0.3s;
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 70px);
-  overflow-y: auto;
-}
 
-.sidebar.collapsed {
-  width: 80px;
-}
+
+
 
 .menu-icon {
   padding: 25px;
@@ -268,26 +253,27 @@
   cursor: pointer;
 }
 
-.sidebar a {
+
+.dashboard-profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  overflow: hidden;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 18px;
-  padding: 18px 25px;
-  color: white;
-  text-decoration: none;
-  transition: 0.3s;
+  background: #f3f4f6;
+  cursor: pointer;
 }
 
-.sidebar a:hover {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.15
-  );
-}
-
-.sidebar a i {
-  font-size: 20px;
-  min-width: 25px;
+.profile-icon i {
+  font-size: 24px;
+  color: #555;
 }

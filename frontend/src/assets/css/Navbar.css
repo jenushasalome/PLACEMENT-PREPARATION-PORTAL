@@ -1,24 +1,34 @@
 .navbar {
-  height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+
+  height: 70px;
+
   background: linear-gradient(
     to right,
-    #6497b5,
+    #06090b,
     #335365
   );
+box-sizing:border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 0 35px;
   color: white;
-  box-shadow: 0 3px 10px
-    rgba(0, 0, 0, 0.15);
+
+  box-shadow: 0 3px 10px rgba(0,0,0,.15);
+
+  z-index: 1000;
 }
 
 .nav-left {
   display: flex;
   align-items: center;
   gap: 12px;
+   margin-left:20px;
 }
 
 .logo-icon {
@@ -34,9 +44,10 @@
 .nav-right {
   font-size: 18px;
   font-weight: 500;
+   margin-right:20px;
 }
 
-/* Tablet */
+
 @media (max-width: 768px) {
   .navbar {
     padding: 0 20px;
@@ -51,7 +62,7 @@
   }
 }
 
-/* Mobile */
+
 @media (max-width: 576px) {
   .navbar {
     height: auto;

@@ -1,0 +1,76 @@
+.aptitude-header {
+  margin-bottom: 40px;
+}
+
+.aptitude-header h1 {
+  color: #335365;
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.aptitude-header p {
+  color: #666;
+  font-size: 18px;
+}
+
+.aptitude-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.aptitude-card {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.aptitude-card:hover {
+  transform: translateY(-6px);
+}
+
+.aptitude-icon {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.quantitative {
+  background: #eef3ff;
+  color: #4c6fff;
+}
+
+.logical {
+  background: #e8fff2;
+  color: #1dbb73;
+}
+
+.verbal {
+  background: #fff5e6;
+  color: #ff9800;
+}
+
+.aptitude-card h3 {
+  color: #335365;
+  margin-bottom: 15px;
+}
+
+.aptitude-card p {
+  color: #666;
+  line-height: 1.6;
+  min-height: 85px;
+}
+
+.aptitude-card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 16px;
+}

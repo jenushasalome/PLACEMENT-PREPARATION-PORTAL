@@ -1,0 +1,41 @@
+.test-container{
+    background:#f4f7fb;
+    min-height:100vh;
+    padding:30px;
+}
+
+
+
+.question-card{
+    background:white;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+    padding:30px;
+}
+
+.navigator button{
+    width:50px;
+    height:50px;
+    margin:5px;
+    font-weight:bold;
+}
+
+.timer{
+    background:white;
+    padding:10px 20px;
+    border-radius:10px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.option{
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#eef4ff;
+}

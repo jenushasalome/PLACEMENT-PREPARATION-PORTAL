@@ -45,7 +45,7 @@ function Login() {
   };
 
   return (
-    <div className="container">
+    <div className="login-container">
       <div className="auth-card">
         {/* Left Section */}
         <div className="left">
@@ -111,11 +111,7 @@ function Login() {
               ></i>
             </div>
 
-            <div className="forgot">
-              <Link to="/forgot-password">
-                Forgot Password?
-              </Link>
-            </div>
+            
 
             <button type="submit">
               Login

@@ -3,24 +3,28 @@ import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import { getDashboard } from "../../services/dashboardService";
 import "../../assets/css/Dashboard.css";
-
+import { getProfile } from "../../services/profileService";
 function Dashboard() {
   const [collapsed, setCollapsed] = useState(false);
 
   const [stats, setStats] = useState({
-    testsTaken: 0,
-    averageScore: 0,
-    codingSolved: 0,
-    mockInterviews: 0,
-  });
+  testsTaken: 0,
+  averageScore: 0,
+  codingSolved: 0,
+  
 
+  upcomingTests: [],
+  upcomingInterviews: [],
+});
+const [profileImage, setProfileImage] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    if (user?.id) {
-      loadDashboard();
-    }
-  }, []);
+  if (user?.id) {
+    loadDashboard();
+    loadProfileImage();
+  }
+}, []);
 
   const loadDashboard = async () => {
     try {
@@ -30,6 +34,16 @@ function Dashboard() {
       console.log("Dashboard Error:", error);
     }
   };
+  const loadProfileImage = async () => {
+  try {
+    const res = await getProfile(user.id);
+
+    setProfileImage(res.data.profileImage);
+
+  } catch (error) {
+    console.log("Profile Image Error:", error);
+  }
+};
 
   const today = new Date().toLocaleDateString("en-GB", {
     day: "numeric",
@@ -47,7 +61,7 @@ function Dashboard() {
           setCollapsed={setCollapsed}
         />
 
-        <div className="content">
+        <div className="dashboard-content">
 
           {/* Dashboard Header */}
 
@@ -64,9 +78,23 @@ function Dashboard() {
                 {today}
               </div>
 
-              <div className="profile-icon">
-                <i className="fa-solid fa-user"></i>
-              </div>
+             <div className="profile-icon">
+
+  {profileImage ? (
+
+    <img
+      src={profileImage}
+      alt="Profile"
+      className="dashboard-profile-image"
+    />
+
+  ) : (
+
+    <i className="fa-solid fa-user"></i>
+
+  )}
+
+</div>
             </div>
           </div>
 
@@ -107,74 +135,111 @@ function Dashboard() {
               </div>
             </div>
 
-            <div className="stat-card">
-              <div className="card-icon blue">
-                <i className="fa-solid fa-user-group"></i>
-              </div>
-
-              <div>
-                <h4>Mock Interviews</h4>
-                <h2>{stats.mockInterviews}</h2>
-              </div>
-            </div>
+           
 
           </div>
 
-          {/* Bottom Section */}
+          {}
 
           <div className="bottom-container">
 
-            <div className="performance-card">
+  {/* Upcoming Tests */}
 
-              <h2>Performance Overview</h2>
+  <div className="test-card-container">
 
-              <div className="chart-placeholder">
-                <i className="fa-solid fa-chart-line"></i>
+    <div className="test-header">
+      <h2>Upcoming Tests</h2>
+      
+    </div>
 
-                <p>
-                  Performance chart will be added later
-                </p>
-              </div>
+   {stats.upcomingTests.length > 0 ? (
 
-            </div>
+  stats.upcomingTests.map((test) => (
 
-            <div className="test-card-container">
+    <div
+      key={test._id}
+      className="test-item"
+    >
 
-              <div className="test-header">
-                <h2>Upcoming Tests</h2>
-                <span>View All</span>
-              </div>
+      <i className="fa-solid fa-file-lines"></i>
 
-              <div className="test-item">
-                <i className="fa-solid fa-file-lines"></i>
+      <div>
 
-                <div>
-                  <h4>Quantitative Aptitude</h4>
-                  <p>25 May 2026 • 11:00 AM</p>
-                </div>
-              </div>
+        <h4>{test.title}</h4>
 
-              <div className="test-item">
-                <i className="fa-solid fa-file-lines"></i>
+        <p>
+          {new Date(test.date).toLocaleDateString()}
+          {" • "}
+          {test.time}
+        </p>
 
-                <div>
-                  <h4>Logical Reasoning</h4>
-                  <p>26 May 2026 • 11:00 AM</p>
-                </div>
-              </div>
+      </div>
 
-              <div className="test-item">
-                <i className="fa-solid fa-file-lines"></i>
+    </div>
 
-                <div>
-                  <h4>Verbal Ability</h4>
-                  <p>27 May 2026 • 10:00 AM</p>
-                </div>
-              </div>
+  ))
 
-            </div>
+) : (
 
-          </div>
+  <p>No upcoming tests.</p>
+
+)}
+
+  </div>
+
+  {/* Upcoming Company Interviews */}
+
+  <div className="test-card-container">
+
+    <div className="test-header">
+      <h2>Upcoming Company Interviews</h2>
+      
+    </div>
+
+    {stats.upcomingInterviews.length > 0 ? (
+
+  stats.upcomingInterviews.map((interview) => (
+
+    <div
+      key={interview._id}
+      className="test-item"
+    >
+
+      <i className="fa-solid fa-building"></i>
+
+      <div>
+
+        <h4>
+          {interview.companyName}
+        </h4>
+
+        <p>
+
+          {interview.role}
+
+          <br />
+
+          {new Date(interview.date).toLocaleDateString()}
+          {" • "}
+          {interview.time}
+
+        </p>
+
+      </div>
+
+    </div>
+
+  ))
+
+) : (
+
+  <p>No upcoming interviews.</p>
+
+)}
+
+  </div>
+
+</div>
 
         </div>
       </div>
