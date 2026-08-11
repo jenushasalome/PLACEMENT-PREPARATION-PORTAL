@@ -42,7 +42,11 @@ function Sidebar({ collapsed, setCollapsed }) {
 
      <Link to="/schedule">
   <i className="fa-solid fa-calendar-days"></i>
-  {!collapsed && <span>Schedule Management</span>}
+  {!collapsed && <span>Reminder</span>}
+</Link>
+<Link to="/study-resources">
+  <i className="fa-solid fa-book-open"></i>
+  {!collapsed && <span>Study Resources</span>}
 </Link>
 
      

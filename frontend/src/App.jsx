@@ -12,6 +12,8 @@ import CodingHome from "./pages/coding/CodingHome";
 import CodingEditor from "./pages/coding/CodingEditor";
 
 import Schedule from "./pages/Schedule/Schedule";
+import StudyResources from "./pages/StudyResources/StudyResources";
+import TopicResources from "./pages/StudyResources/TopicResources";
 
 function App() {
   return (
@@ -72,6 +74,14 @@ function App() {
       <Schedule />
     </ProtectedRoute>
   }
+/>
+<Route
+  path="/study-resources"
+  element={<StudyResources />}
+/>
+<Route
+  path="/study-resources/:topic"
+  element={<TopicResources />}
 />
 
       </Routes>

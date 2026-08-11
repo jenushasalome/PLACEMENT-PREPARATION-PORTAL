@@ -92,14 +92,14 @@ const handleEditInterview = (interview) => {
 
   <div className="schedule-header">
 
-    <h1>Schedule Management</h1>
+    <h1>Reminders Management</h1>
 
     <button
   className="add-btn"
   onClick={() => setShowModal(true)}
 >
       <i className="fa-solid fa-plus"></i>
-      Add Schedule
+      Add Reminder
     </button>
 
   </div>
