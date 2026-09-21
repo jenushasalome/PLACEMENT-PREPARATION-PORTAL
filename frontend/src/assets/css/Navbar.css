@@ -80,3 +80,302 @@ box-sizing:border-box;
     text-align: center;
   }
 }
+/* =========================================
+   NOTIFICATION
+========================================= */
+
+.notification-wrapper {
+  position: relative;
+  margin-right: 25px;
+}
+
+.notification-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.notification-btn:hover {
+  opacity: 0.8;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -3px;
+
+  min-width: 18px;
+  height: 18px;
+
+  background: #e53935;
+  color: white;
+
+  border-radius: 50%;
+
+  font-size: 11px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #29495a;
+}
+
+
+/* =========================================
+   NOTIFICATION DROPDOWN
+========================================= */
+
+.notification-dropdown {
+  position: absolute;
+
+  top: 48px;
+  right: -10px;
+
+  width: 380px;
+  max-height: 450px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+  overflow: hidden;
+
+  z-index: 1000;
+}
+
+
+/* =========================================
+   NOTIFICATION HEADER
+========================================= */
+
+.notification-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 18px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.notification-header h3 {
+  margin: 0;
+
+  color: #29495a;
+
+  font-size: 18px;
+}
+
+.mark-all-btn {
+  border: none;
+
+  background: none;
+
+  color: #39708a;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.mark-all-btn:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   NOTIFICATION LIST
+========================================= */
+
+.notification-list {
+  max-height: 380px;
+
+  overflow-y: auto;
+}
+
+
+/* =========================================
+   NOTIFICATION ITEM
+========================================= */
+
+.notification-item {
+  display: flex;
+
+  gap: 12px;
+
+  padding: 15px;
+
+  border-bottom: 1px solid #eeeeee;
+
+  cursor: pointer;
+
+  transition: background 0.2s;
+}
+
+.notification-item:hover {
+  background: #f5f8fa;
+}
+
+.notification-item.unread {
+  background: #eef7fb;
+}
+
+
+/* =========================================
+   NOTIFICATION ICON
+========================================= */
+
+.notification-icon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #dceef5;
+
+  color: #39708a;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+/* =========================================
+   NOTIFICATION CONTENT
+========================================= */
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-content h4 {
+  margin: 0 0 5px;
+
+  color: #29495a;
+
+  font-size: 14px;
+}
+
+.notification-content p {
+  margin: 0 0 5px;
+
+  color: #555555;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+.notification-content small {
+  color: #999999;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   NO NOTIFICATIONS
+========================================= */
+
+.no-notifications {
+  padding: 40px 20px;
+
+  text-align: center;
+
+  color: #999999;
+}
+
+.no-notifications i {
+  font-size: 30px;
+
+  margin-bottom: 10px;
+}
+
+.no-notifications p {
+  margin: 0;
+}
+/* =========================================
+   FIX NAVBAR LAYOUT
+========================================= */
+
+.navbar {
+  height: 90px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 30px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-right {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end;
+  gap: 25px;
+  height: 100%;
+  white-space: nowrap;
+}
+
+.notification-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 0;
+}
+
+.notification-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+
+/* Notification dropdown should stay below bell */
+
+.notification-dropdown {
+  position: absolute;
+  top: 65px;
+  right: 0;
+  width: 380px;
+  max-height: 450px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 9999;
+}

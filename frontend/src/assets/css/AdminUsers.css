@@ -1,0 +1,310 @@
+.admin-users-page {
+  min-height: 100vh;
+  display: flex;
+  background: #eef3f6;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.admin-users-sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #183746;
+  color: white;
+  padding: 25px 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-users-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 12px 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.admin-users-logo i {
+  color: #8fc1df;
+  font-size: 25px;
+}
+
+.admin-users-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 25px;
+}
+
+.admin-users-menu button {
+  border: none;
+  background: transparent;
+  color: #d9e5ea;
+  padding: 13px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.admin-users-menu button i {
+  width: 20px;
+  text-align: center;
+}
+
+.admin-users-menu button:hover,
+.admin-users-menu button.active {
+  background: #335365;
+  color: white;
+}
+
+.admin-users-logout {
+  margin-top: auto;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  padding: 13px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.admin-users-logout:hover {
+  background: #b83b3b;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.admin-users-main {
+  flex: 1;
+  padding: 35px;
+  box-sizing: border-box;
+}
+
+.admin-users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.admin-users-header h1 {
+  margin: 0;
+  color: #183746;
+  font-size: 30px;
+}
+
+.admin-users-header p {
+  margin: 7px 0 0;
+  color: #71818a;
+  font-size: 14px;
+}
+
+.refresh-users-btn {
+  border: none;
+  background: #335365;
+  color: white;
+  padding: 11px 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.refresh-users-btn:hover {
+  background: #274653;
+}
+
+/* =========================
+   SUMMARY
+========================= */
+
+.users-summary-card {
+  width: 250px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  margin-bottom: 25px;
+}
+
+.users-summary-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: #e5f1f7;
+  color: #335365;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+}
+
+.users-summary-card h2 {
+  margin: 0;
+  color: #183746;
+  font-size: 25px;
+}
+
+.users-summary-card p {
+  margin: 3px 0 0;
+  color: #71818a;
+  font-size: 13px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.admin-users-table-container {
+  background: white;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.admin-users-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 850px;
+}
+
+.admin-users-table th {
+  background: #f4f7f9;
+  color: #335365;
+  padding: 15px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-users-table td {
+  padding: 15px;
+  border-top: 1px solid #edf1f3;
+  color: #4e626c;
+  font-size: 13px;
+}
+
+.admin-users-table tbody tr:hover {
+  background: #fafcfd;
+}
+
+/* User Name */
+
+.user-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #183746;
+  font-weight: 600;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #6497b5;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* Delete */
+
+.delete-user-btn {
+  border: none;
+  background: #ffe7e7;
+  color: #c62828;
+  padding: 8px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.delete-user-btn:hover {
+  background: #ffd3d3;
+}
+
+/* =========================
+   STATES
+========================= */
+
+.admin-users-loading,
+.no-users {
+  background: white;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #71818a;
+}
+
+.admin-users-loading i,
+.no-users i {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #6497b5;
+}
+
+.no-users h3 {
+  margin: 5px 0;
+  color: #335365;
+}
+
+.no-users p {
+  margin: 3px 0;
+  font-size: 13px;
+}
+
+.admin-users-error {
+  background: #ffe5e5;
+  border: 1px solid #f5b5b5;
+  color: #c62828;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+  .admin-users-sidebar {
+    width: 210px;
+  }
+
+  .admin-users-main {
+    padding: 20px;
+  }
+
+  .admin-users-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

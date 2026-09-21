@@ -60,4 +60,4 @@ export const resetPassword = async(req, res) => {
     }
 }
 
-export const 
+export const;

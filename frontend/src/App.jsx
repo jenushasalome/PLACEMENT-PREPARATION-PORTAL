@@ -14,6 +14,15 @@ import CodingEditor from "./pages/coding/CodingEditor";
 import Schedule from "./pages/Schedule/Schedule";
 import StudyResources from "./pages/StudyResources/StudyResources";
 import TopicResources from "./pages/StudyResources/TopicResources";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminAptitude from "./pages/admin/AdminAptitude";
+import AdminCoding from "./pages/admin/AdminCoding";
+import AdminTests from "./pages/admin/AdminTests";
+import AdminInterviews from "./pages/admin/AdminInterviews";
+import AdminReminders from "./pages/admin/AdminReminders";
+
 
 function App() {
   return (
@@ -83,6 +92,40 @@ function App() {
   path="/study-resources/:topic"
   element={<TopicResources />}
 />
+<Route
+  path="/admin/login"
+  element={<AdminLogin />}
+/>
+<Route
+  path="/admin/dashboard"
+  element={<AdminDashboard />}
+/>
+<Route
+  path="/admin/users"
+  element={<AdminUsers />}
+/>
+<Route
+  path="/admin/aptitude"
+  element={<AdminAptitude />}
+/>
+<Route
+  path="/admin/coding"
+  element={<AdminCoding />}
+/>
+<Route
+  path="/admin/tests"
+  element={<AdminTests />}
+/>
+<Route
+  path="/admin/interviews"
+  element={<AdminInterviews />}
+/>
+<Route
+  path="/admin/reminders"
+  element={<AdminReminders />}
+/>
+
+
 
       </Routes>
     </BrowserRouter>
